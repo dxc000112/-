@@ -1,0 +1,14 @@
+{
+  "name": "easy-apply-cn",
+  "version": "0.1.0",
+  "description": "中文 Simplify - 求职表单一键填充 Chrome 插件",
+  "scripts": {
+    "build": "tsc && node build.mjs",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.260",
+    "typescript": "^5.4.0",
+    "esbuild": "^0.21.0"
+  }
+}
