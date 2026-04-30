@@ -52,10 +52,22 @@ export function fillInput(el: HTMLInputElement | HTMLTextAreaElement, value: str
 
 export function fillSelect(el: HTMLSelectElement, value: string) {
   const options = Array.from(el.options);
+
+  // 精确匹配
   let matched = options.find(o => o.value === value || o.text === value);
+
   if (!matched) {
-    matched = options.find(o => o.text.includes(value) || value.includes(o.text));
+    // 把多值字符串（"A/B/C" 或 "A，B，C"）拆开，逐个尝试
+    const parts = value.split(/[/／，,、\s]+/).map(s => s.trim()).filter(Boolean);
+    for (const part of parts) {
+      matched = options.find(o =>
+        o.value === part || o.text === part ||
+        o.text.includes(part) || part.includes(o.text)
+      );
+      if (matched) break;
+    }
   }
+
   if (matched) {
     el.value = matched.value;
     el.dispatchEvent(new Event('change', { bubbles: true }));
