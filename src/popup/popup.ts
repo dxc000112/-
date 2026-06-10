@@ -2,14 +2,17 @@ import { loadProfile, saveProfile } from '../utils/storage';
 import { UserProfile } from '../utils/formFiller';
 
 const FIELDS: (keyof UserProfile)[] = [
-  'name', 'phone', 'email', 'school', 'major', 'graduationYear',
-  'yearsExp', 'currentCity', 'targetCity', 'expectedSalary', 'selfIntro',
+  'name', 'gender', 'birthDate', 'idNumber', 'phone', 'email', 'wechat',
+  'politicalStatus', 'ethnicity', 'hometown', 'currentCity', 'address',
+  'school', 'degree', 'major', 'graduationYear', 'gpa', 'rankPercent', 'englishLevel',
+  'targetJob', 'targetIndustry', 'targetCity', 'expectedSalary', 'jobStatus', 'yearsExp',
+  'skills', 'selfIntro',
 ];
 
 function getFormValues(): UserProfile {
   const profile = {} as UserProfile;
   for (const field of FIELDS) {
-    const el = document.getElementById(field) as HTMLInputElement | HTMLTextAreaElement;
+    const el = document.getElementById(field) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
     profile[field] = el?.value.trim() ?? '';
   }
   return profile;
@@ -17,7 +20,7 @@ function getFormValues(): UserProfile {
 
 function setFormValues(profile: UserProfile) {
   for (const field of FIELDS) {
-    const el = document.getElementById(field) as HTMLInputElement | HTMLTextAreaElement;
+    const el = document.getElementById(field) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
     if (el) el.value = profile[field] ?? '';
   }
 }

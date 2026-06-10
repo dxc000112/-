@@ -20,8 +20,11 @@ await esbuild.build({
 });
 
 // 复制静态文件
-copyFileSync('manifest.json', `${dist}/manifest.json`);
-copyFileSync('popup.html',    `${dist}/popup.html`);
-copyFileSync('popup.css',     `${dist}/popup.css`);
+copyFileSync('manifest.json',          `${dist}/manifest.json`);
+copyFileSync('popup.html',             `${dist}/popup.html`);
+copyFileSync('popup.css',              `${dist}/popup.css`);
+copyFileSync('src/icons/icon16.png',   `${dist}/icons/icon16.png`);
+copyFileSync('src/icons/icon48.png',   `${dist}/icons/icon48.png`);
+copyFileSync('src/icons/icon128.png',  `${dist}/icons/icon128.png`);
 
 console.log('✦ Build complete → dist/');

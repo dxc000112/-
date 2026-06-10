@@ -3,17 +3,12 @@ import { UserProfile } from './formFiller';
 const STORAGE_KEY = 'easyApplyProfile';
 
 export const emptyProfile: UserProfile = {
-  name: '',
-  phone: '',
-  email: '',
-  school: '',
-  major: '',
-  graduationYear: '',
-  yearsExp: '',
-  currentCity: '',
-  targetCity: '',
-  expectedSalary: '',
-  selfIntro: '',
+  name: '', gender: '', birthDate: '', idNumber: '',
+  phone: '', email: '', wechat: '',
+  politicalStatus: '', ethnicity: '', hometown: '', currentCity: '', address: '',
+  school: '', degree: '', major: '', graduationYear: '', gpa: '', rankPercent: '', englishLevel: '',
+  targetJob: '', targetIndustry: '', targetCity: '', expectedSalary: '', jobStatus: '', yearsExp: '',
+  skills: '', selfIntro: '',
 };
 
 export function loadProfile(): Promise<UserProfile> {
