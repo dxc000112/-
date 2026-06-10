@@ -87,17 +87,17 @@ easy-apply-cn/
 
 ### Q2: 复杂的下拉选择框 (`select`) 如何做智能适配？
 * **技术方案**: 
-  我们在 [formFiller.ts](file:///Users/ding/Desktop/easy-apply-cn/src/utils/formFiller.ts#L53) 中实现了一套双层匹配算法：
+  我们在 [formFiller.ts](src/utils/formFiller.ts#L53) 中实现了一套双层匹配算法：
   1. **第一层：精确匹配**。遍历下拉列表的所有选项，如果选项的 `value` 或 `text` 与用户简历里的配置完全一致，则直接选中。
   2. **第二层：多值拆分与模糊包含匹配**。如果精确匹配失败（例如用户简历写的是“中共党员”，而网站选项是“党员/团员”），算法将用正则拆分字符串（如 `/`、`，`、`、` 等），遍历子词进行双向包含检查（`text.includes(part) || part.includes(text)`），从而智能化地完成自适应匹配。
 
 ### Q3: 你的启发式匹配算法（Heuristic Match）是如何设计优先级的？
 * **优先级原则**: 
-  我们将高特异性的字段（如“身份证”、“政治面貌”、“户籍”）排在匹配字典的最前面，防止它们被宽泛的通用词（如“地址”、“城市”、“学校”）误伤抢占。同时，我们通过遍历 `placeholder` -> `name` -> `id` -> `aria-label` -> 包裹 `label` 节点的文字内容进行得分排序，以此保证推断的绝对准确性。
+  我们将高特异性的字段（如“身份证”、“政治面貌”、“户籍”）排在匹配字典的最前面，防止它们被宽泛的通用词（如“地址”、“城市”、“学校”）误伤抢占。同时， we 通过遍历 `placeholder` -> `name` -> `id` -> `aria-label` -> 包裹 `label` 节点的文字内容进行得分排序，以此保证推断的绝对准确性。
 
 ---
 
 ## 📝 贡献指南
 
-1. **新增支持字段**: 在 [formFiller.ts](file:///Users/ding/Desktop/easy-apply-cn/src/utils/formFiller.ts#L1) 中的 `UserProfile` 添加字段，并在 `FIELD_MAP` 中扩充关键词。
+1. **新增支持字段**: 在 [formFiller.ts](src/utils/formFiller.ts#L1) 中的 `UserProfile` 添加字段，并在 `FIELD_MAP` 中扩充关键词。
 2. **新增站点适配**: 如果某个招聘系统使用了非常规的 Shadow DOM 或自定义 Canvas 输入框，可以在 `src/content/` 下添加针对性的适配模块。
